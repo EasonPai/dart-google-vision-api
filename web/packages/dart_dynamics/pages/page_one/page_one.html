@@ -1,0 +1,17 @@
+<dom-module id="page-one">
+    <link rel="import" type="css" href="page_one.css">
+    <template>
+        <div id="page-one" class="layout horizontal center-center fit">
+            <div class="layout vertical fit">
+                <paper-material class="layout vertical center-center flex" elevation="1">
+                    <template is="dom-repeat" items="{{sections}}" as="section">
+                        <paper-button on-tap="gotoSection">{{section.name}}</paper-button>
+                    </template>
+                    <paper-material id="container" class="layout vertical center-center flex" elevation="1">
+                        container
+                    </paper-material>
+                </paper-material>
+            </div>
+        </div>
+    </template>
+</dom-module>
