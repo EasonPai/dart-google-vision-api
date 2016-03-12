@@ -27,5 +27,15 @@
                 </div>
             </paper-material>
         </div>
+        <paper-dialog id="dialogDetail">
+            <h2>Result JSON</h2>
+            <paper-dialog-scrollable>
+                {{infoDetailData}}
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <!--<paper-button dialog-dismiss>Cancel</paper-button>-->
+                <paper-button dialog-confirm autofocus>OK</paper-button>
+            </div>
+        </paper-dialog>
     </template>
 </dom-module>
