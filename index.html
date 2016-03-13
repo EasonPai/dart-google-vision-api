@@ -22891,25 +22891,248 @@ Custom property | Description | Default
             </div>
         </paper-dialog>
     </template>
-</dom-module><dom-module id="camera-vision">
+</dom-module>
+
+
+
+
+<!--
+Material design: [Cards](https://www.google.com/design/spec/components/cards.html)
+
+`paper-card` is a container with a drop shadow.
+
+Example:
+
+    <paper-card heading="Card Title">
+      <div class="card-content">Some content</div>
+      <div class="card-actions">
+        <paper-button>Some action</paper-button>
+      </div>
+    </paper-card>
+
+Example - top card image:
+
+    <paper-card heading="Card Title" image="/path/to/image.png">
+      ...
+    </paper-card>
+
+### Accessibility
+
+By default, the `aria-label` will be set to the value of the `heading` attribute.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-card-header-color` | The color of the header text | `#000`
+`--paper-card-header` | Mixin applied to the card header section | `{}`
+`--paper-card-header-text` | Mixin applied to the title in the card header section | `{}`
+`--paper-card-header-image` | Mixin applied to the image in the card header section | `{}`
+`--paper-card-header-image-text` | Mixin applied to the text overlapping the image in the card header section | `{}`
+`--paper-card-content` | Mixin applied to the card content section| `{}`
+`--paper-card-actions` | Mixin applied to the card action section | `{}`
+`--paper-card` | Mixin applied to the card | `{}`
+
+@group Paper Elements
+@element paper-card
+@demo demo/index.html
+-->
+
+<dom-module id="paper-card">
+  <template>
+    <style include="paper-material">
+      :host {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+
+        background: #fff;
+        border-radius: 2px;
+        @apply(--paper-card);
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      [hidden] {
+        display: none !important;
+      }
+
+      .header {
+        position: relative;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        overflow: hidden;
+        @apply(--paper-card-header);
+      }
+
+      .header iron-image {
+        width: 100%;
+        --iron-image-width: 100%;
+        pointer-events: none;
+        @apply(--paper-card-header-image);
+      }
+
+      .header .title-text {
+        padding: 16px;
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--paper-card-header-color, #000);
+        @apply(--paper-card-header-text);
+      }
+
+      .header .title-text.over-image {
+        position: absolute;
+        bottom: 0px;
+        @apply(--paper-card-header-image-text);
+      }
+
+      :host ::content .card-content {
+        padding: 16px;
+        position:relative;
+        @apply(--paper-card-content);
+      }
+
+      :host ::content .card-actions {
+        border-top: 1px solid #e8e8e8;
+        padding: 5px 16px;
+        position:relative;
+        @apply(--paper-card-actions);
+      }
+    </style>
+
+    <div class="header">
+      <iron-image hidden$="[[!image]]" src="[[image]]" preload$="[[preloadImage]]" fade$="[[fadeImage]]"></iron-image>
+      <div hidden$="[[!heading]]" class$="[[_computeHeadingClass(image)]]">[[heading]]</div>
+    </div>
+
+    <content></content>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'paper-card',
+
+    properties: {
+
+      /**
+       * The title of the card.
+       */
+      heading: {
+        type: String,
+        value: '',
+        observer: '_headingChanged'
+      },
+
+      /**
+       * The url of the title image of the card.
+       */
+      image: {
+        type: String,
+        value: ''
+      },
+
+      /**
+       * When `true`, any change to the image url property will cause the
+       * `placeholder` image to be shown until the image is fully rendered.
+       */
+      preloadImage: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * When `preloadImage` is true, setting `fadeImage` to true will cause the
+       * image to fade into place.
+       */
+      fadeImage: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The z-depth of the card, from 0-5.
+       */
+      elevation: {
+        type: Number,
+        value: 1,
+        reflectToAttribute: true
+      },
+
+      /**
+       * Set this to true to animate the card shadow when setting a new
+       * `z` value.
+       */
+      animatedShadow: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Read-only property used to pass down the `animatedShadow` value to
+       * the underlying paper-material style (since they have different names).
+       */
+      animated: {
+        type: Boolean,
+        reflectToAttribute: true,
+        readOnly: true,
+        computed: '_computeAnimated(animatedShadow)'
+      }
+    },
+
+    _headingChanged: function(heading) {
+      var label = this.getAttribute('aria-label');
+      this.setAttribute('aria-label', heading);
+    },
+
+    _computeHeadingClass: function(image) {
+      var cls = 'title-text';
+      if (image)
+        cls += ' over-image';
+      return cls;
+    },
+
+    _computeAnimated: function(animatedShadow) {
+      return animatedShadow;
+    }
+  });
+</script>
+
+
+
+
+
+<dom-module id="camera-vision">
     <link rel="import" type="css" href="packages/dart_dynamics/pages/camera_vision/camera_vision.css">
     <template>
-        <div class="layout horizontal center-center fit">
-            <paper-card heading="Emmental">
-                <div class="card-content">
-                    <video id="video"></video>
-                    <canvas id="canvas" hidden=""></canvas>
+        <canvas id="canvas" hidden=""></canvas>
+        <!--<div class="layout horizontal center-center fit">-->
+            <!--<paper-card>-->
+                <div class="container flex layout horizontal">
+                    <div><video id="video"></video></div>
+                    <div>
+                        <paper-spinner active=""></paper-spinner>
+                        <div id="vison_result"></div>
+                    </div>
                 </div>
-                <div class="card-actions">
-                    <paper-spinner active=""></paper-spinner>
-                    <div id="vison_result"></div>
-                    <paper-button id="btnCapture">Capture</paper-button>
-                    <paper-button>Explore!</paper-button>
-                </div>
-            </paper-card>
+                <!--<div class="card-content">-->
+                    <!--<video id="video"></video>-->
+                    <!--<paper-spinner active></paper-spinner>-->
+                    <!--<div id="vison_result"></div>-->
+                <!--</div>-->
+                <!--<div class="card-actions">-->
+                    <paper-button id="btnCapture">Capture!</paper-button>
+                    <paper-button id="startSafeCity">Start 智慧兒童安全監控</paper-button>
+                    <paper-button id="stopSafeCity">Stop 智慧兒童安全監控</paper-button>
+                <!--</div>-->
+            <!--</paper-card>-->
 
-    
-</div></template></dom-module><dom-module id="app-demo">
+    </template>
+</dom-module><dom-module id="app-demo">
     <!--<style include="theme"></style>-->
     <link rel="import" type="css" href="packages/dart_dynamics/app/app.css">
     <template>

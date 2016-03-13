@@ -1,19 +1,27 @@
 <dom-module id="camera-vision">
     <link rel="import" type="css" href="camera_vision.css">
     <template>
-        <div class="layout horizontal center-center fit">
-            <paper-card heading="Emmental">
-                <div class="card-content">
-                    <video id="video"></video>
-                    <canvas id="canvas" hidden></canvas>
+        <canvas id="canvas" hidden></canvas>
+        <!--<div class="layout horizontal center-center fit">-->
+            <!--<paper-card>-->
+                <div class="container flex layout horizontal">
+                    <div><video id="video"></video></div>
+                    <div>
+                        <paper-spinner active></paper-spinner>
+                        <div id="vison_result"></div>
+                    </div>
                 </div>
-                <div class="card-actions">
-                    <paper-spinner active></paper-spinner>
-                    <div id="vison_result"></div>
-                    <paper-button id="btnCapture">Capture</paper-button>
-                    <paper-button>Explore!</paper-button>
-                </div>
-            </paper-card>
+                <!--<div class="card-content">-->
+                    <!--<video id="video"></video>-->
+                    <!--<paper-spinner active></paper-spinner>-->
+                    <!--<div id="vison_result"></div>-->
+                <!--</div>-->
+                <!--<div class="card-actions">-->
+                    <paper-button id="btnCapture">Capture!</paper-button>
+                    <paper-button id="startSafeCity">Start 智慧兒童安全監控</paper-button>
+                    <paper-button id="stopSafeCity">Stop 智慧兒童安全監控</paper-button>
+                <!--</div>-->
+            <!--</paper-card>-->
 
     </template>
 </dom-module>
