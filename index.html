@@ -23120,14 +23120,26 @@ Custom property | Description | Default
                         <video id="video"></video>
                     <!--</div>-->
                     <!--<paper-material elevation="5">-->
-                        <div class="vision_response" style="font-size: 40px;">
-                            <paper-button> 安全 </paper-button>
+                        <div class="vision_response" style="">
+                            <paper-button id="label_safe" style="color: darkcyan;
+background-color: bisque;font-size: 40px;"> 安全 </paper-button>
+                            <paper-button id="label_unsafe" style="color: orangered;
+background-color: bisque;font-size: 40px;"> 狀況發生 </paper-button>
+
+                            <div id="label_result" style="color: darkturquoise;
+background-color: bisque;font-size: 40px;">
+
+                            </div>
+
+                            <div>
+                                <paper-spinner active=""></paper-spinner>
+                                <div id="vison_result"></div>
+                            </div>
                         </div>
                     <!--</paper-material>-->
-                    <div class="vision_discription">
-                        <paper-spinner active=""></paper-spinner>
-                        <div id="vison_result"></div>
-                    </div>
+                    <!--<div class="vision_discription">-->
+                        <!-- -->
+                    <!--</div>-->
                 </div>
                 <!--<div class="card-content">-->
                     <!--<video id="video"></video>-->
