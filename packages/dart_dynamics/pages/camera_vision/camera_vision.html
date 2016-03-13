@@ -1,12 +1,22 @@
 <dom-module id="camera-vision">
     <link rel="import" type="css" href="camera_vision.css">
     <template>
+        <paper-button id="btnCapture">Capture!</paper-button>
+        <paper-button id="startSafeCity">Start 智慧兒童安全監控</paper-button>
+        <paper-button id="stopSafeCity">Stop 智慧兒童安全監控</paper-button>
         <canvas id="canvas" hidden></canvas>
         <!--<div class="layout horizontal center-center fit">-->
             <!--<paper-card>-->
                 <div class="container flex layout horizontal">
-                    <div><video id="video"></video></div>
-                    <div>
+                    <!--<div>-->
+                        <video id="video"></video>
+                    <!--</div>-->
+                    <!--<paper-material elevation="5">-->
+                        <div class="vision_response" style="font-size: 40px;">
+                            <paper-button> 安全 </paper-button>
+                        </div>
+                    <!--</paper-material>-->
+                    <div class="vision_discription">
                         <paper-spinner active></paper-spinner>
                         <div id="vison_result"></div>
                     </div>
@@ -17,9 +27,7 @@
                     <!--<div id="vison_result"></div>-->
                 <!--</div>-->
                 <!--<div class="card-actions">-->
-                    <paper-button id="btnCapture">Capture!</paper-button>
-                    <paper-button id="startSafeCity">Start 智慧兒童安全監控</paper-button>
-                    <paper-button id="stopSafeCity">Stop 智慧兒童安全監控</paper-button>
+
                 <!--</div>-->
             <!--</paper-card>-->
 
