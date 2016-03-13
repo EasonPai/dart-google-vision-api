@@ -1,0 +1,19 @@
+<dom-module id="camera-vision">
+    <link rel="import" type="css" href="camera_vision.css">
+    <template>
+        <div class="layout horizontal center-center fit">
+            <paper-card heading="Emmental">
+                <div class="card-content">
+                    <video id="video"></video>
+                    <canvas id="canvas" hidden></canvas>
+                </div>
+                <div class="card-actions">
+                    <paper-spinner active></paper-spinner>
+                    <div id="vison_result"></div>
+                    <paper-button id="btnCapture">Capture</paper-button>
+                    <paper-button>Explore!</paper-button>
+                </div>
+            </paper-card>
+
+    </template>
+</dom-module>

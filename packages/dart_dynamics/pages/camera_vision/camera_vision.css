@@ -1,0 +1,23 @@
+:host {
+    display: block;
+}
+
+div {
+    margin: 5px;
+    padding: 10px;
+}
+
+paper-material {
+    margin: 10px;
+    background-color: white;
+}
+
+
+paper-dialog.size-position {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 300px;
+    height: 300px;
+    overflow: auto;
+}
